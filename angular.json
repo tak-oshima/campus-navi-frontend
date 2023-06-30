@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "rate-my-professor": {
+    "campus-navi-frontend": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/rate-my-professor",
+            "outputPath": "dist/campus-navi-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "rate-my-professor:build:production"
+              "browserTarget": "campus-navi-frontend:build:production"
             },
             "development": {
-              "browserTarget": "rate-my-professor:build:development"
+              "browserTarget": "campus-navi-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "rate-my-professor:build"
+            "browserTarget": "campus-navi-frontend:build"
           }
         },
         "test": {

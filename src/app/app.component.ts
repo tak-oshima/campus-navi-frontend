@@ -15,5 +15,5 @@ import { trigger, transition, style, animate } from '@angular/animations';
   ],
 })
 export class AppComponent {
-  title = 'rate-my-professor';
+  title = 'campus-navi-frontend';
 }
