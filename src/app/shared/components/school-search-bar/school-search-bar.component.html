@@ -1,0 +1,9 @@
+<input
+  type="text"
+  [formControl]="search"
+  placeholder="Type here"
+  class="input input-bordered input-primary w-full max-w-xs"
+/>
+<ul>
+  <li *ngFor="let item of suggestions">{{ item }}</li>
+</ul>

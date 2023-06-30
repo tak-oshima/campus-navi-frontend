@@ -1,11 +1,17 @@
 <div class="min-h-full">
-  <app-daisy-navbar></app-daisy-navbar>
   <header>
     <h1 class="sr-only">教授ナビ</h1>
   </header>
   <main>
-    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+    <app-daisy-navbar></app-daisy-navbar>
+    <div class="mx-auto">
       <!-- Your content -->
+      <app-daisy-overlay-hero>
+          <h1 class="mb-12 text-5xl font-bold">学校で絞り込む</h1>
+          <p class="mb-6">サインアップをして学校名を保存すると、次回からこのステップをステップを飛ばすことができます。</p>
+          <app-school-search-bar class="mb-12"></app-school-search-bar>
+      </app-daisy-overlay-hero>
     </div>
+    <app-footer></app-footer>
   </main>
 </div>
