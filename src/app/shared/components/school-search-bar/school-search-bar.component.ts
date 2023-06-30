@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, of, switchMap } from 'rxjs';
 
@@ -8,24 +8,35 @@ import { debounceTime, of, switchMap } from 'rxjs';
   styleUrls: ['./school-search-bar.component.css']
 })
 export class SchoolSearchBarComponent implements OnInit {
-  public search = new FormControl();
+  search = new FormControl();
+  isFocused: boolean = false;
   suggestions: any[] = [];
+  
+  @HostListener('focusin') onFocusIn() {
+    this.isFocused = true;
+  }
+
+  @HostListener('focusout') onFocusOut() {
+    this.isFocused = false;
+  }
 
   ngOnInit() {
     this.search.valueChanges
       .pipe(
         debounceTime(500), // delay
         switchMap(query => {
-          if (!query) {
-            return of([]);
-          }
-          return of(["慶應義塾大学", "東京大学", "早稲田大学", "青山学院大学"].filter(school => school.startsWith(query as string)))
+          // if (!query) {
+          //   return of([]);
+          // }
+          return of(["慶應義塾大学", "東京大学", "早稲田大学", "青山学院大学", "筑波大学", "日本大学", "明治大学", "立教大学", "千葉大学", "京都大学"].filter(school => school.startsWith(query as string)))
         })
       )
       .subscribe(response => {
         this.suggestions = response;
+        console.log(this.suggestions);
       });
   }
+  
 }
 
 /** Example of how to autocomplete search bar
