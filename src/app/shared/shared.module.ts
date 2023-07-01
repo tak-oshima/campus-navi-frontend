@@ -7,6 +7,7 @@ import { ReactiveFormsModule, COMPOSITION_BUFFER_MODE } from '@angular/forms';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { DaisyOverlayHeroComponent } from './components/daisy-overlay-hero/daisy-overlay-hero.component';
 import { SchoolSearchBarComponent } from './components/school-search-bar/school-search-bar.component';
+import { SignupFormComponent } from './components/signup-form/signup-form.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SchoolSearchBarComponent } from './components/school-search-bar/school-
     LoginFormComponent,
     DaisyOverlayHeroComponent,
     SchoolSearchBarComponent,
+    SignupFormComponent,
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,6 @@
 <div class="navbar bg-base-100">
   <div class="flex-1">
-    <a class="btn btn-ghost normal-case text-xl">RMP</a>
+    <a class="btn btn-ghost normal-case text-xl">Campus Navi</a>
   </div>
   
   <div class="flex-none gap-2">
@@ -14,7 +14,7 @@
 
     <ul class="menu menu-horizontal px-1">
       <li><a (click)="openLoginModal()">ログイン</a></li>
-      <li><a class="bg-primary">サインアップ</a></li>
+      <li><a class="bg-primary" (click)="openSignupModal()">サインアップ</a></li>
     </ul>
 
     <div class="dropdown dropdown-end">
@@ -47,6 +47,8 @@
   </app-daisy-modal>
 
   <!-- Signup Modal -->
-
+  <app-daisy-modal #signupModal>
+    <app-signup-form></app-signup-form>
+  </app-daisy-modal>
 </div>
 

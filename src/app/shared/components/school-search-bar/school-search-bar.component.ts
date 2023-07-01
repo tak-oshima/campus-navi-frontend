@@ -25,10 +25,10 @@ export class SchoolSearchBarComponent implements OnInit {
       .pipe(
         debounceTime(500), // delay
         switchMap(query => {
-          // if (!query) {
-          //   return of([]);
-          // }
-          return of(["慶應義塾大学", "東京大学", "早稲田大学", "青山学院大学", "筑波大学", "日本大学", "明治大学", "立教大学", "千葉大学", "京都大学"].filter(school => school.startsWith(query as string)))
+          if (!query) {
+            return of([]);
+          }
+          return of(["慶應義塾大学", "東京大学", "早稲田大学", "青山学院大学", "筑波大学", "日本大学", "明治大学", "立教大学", "千葉大学", "京都大学"].filter(school => school.includes(query as string)))
         })
       )
       .subscribe(response => {

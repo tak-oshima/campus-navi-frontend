@@ -8,6 +8,7 @@ import { DaisyModalComponent } from '../daisy-modal/daisy-modal.component';
 })
 export class DaisyNavbarComponent {
   @ViewChild('loginModal') loginModal!: DaisyModalComponent;
+  @ViewChild('signupModal') signupModal!: DaisyModalComponent;
 
   ngAfterViewInit() {
     // Make sure modal is defined
@@ -16,5 +17,9 @@ export class DaisyNavbarComponent {
 
   openLoginModal() {
     this.loginModal.openModal();
+  }
+
+  openSignupModal() {
+    this.signupModal.openModal();
   }
 }
