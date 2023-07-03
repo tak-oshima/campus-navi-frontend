@@ -8,6 +8,8 @@ import { PageNotFoundComponent } from './features/page-not-found/page-not-found.
 import { HomeComponent } from './features/home/home.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { CoreModule } from './core/core.module';
     CoreModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
