@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { UnauthorizedErrorInterceptor } from './core/interceptors/unauthorized-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })
