@@ -1,29 +1,90 @@
 <div class="navbar bg-base-100">
-  <div class="flex-1">
+
+  <div class="navbar-start w-3/12 lg:w-1/5">
     <a class="btn btn-ghost normal-case text-xl">Campus Navi</a>
   </div>
-  
-  <div class="flex-none gap-2">
-    <div class="form-control">
-      <input
-        type="text"
-        placeholder="Search"
-        class="input input-bordered w-24 md:w-auto"
-      />
-    </div>
 
-    <ul class="menu menu-horizontal px-1">
-      <li><a (click)="openLoginModal()">ログイン</a></li>
-      <li><a class="bg-primary" (click)="openSignupModal()">サインアップ</a></li>
-    </ul>
+  <div class="navbar-center w-8/12 lg:w-3/5 justify-center gap-6">
+    <input
+      type="text"
+      placeholder="教授名"
+      class="input input-bordered hidden md:flex w-full"
+    />
+    <input
+      type="text"
+      placeholder="学校名"
+      class="input input-bordered hidden md:flex w-full"
+    />
+  </div>
 
-    <div class="dropdown dropdown-end">
-      <label tabindex="0" class="btn btn-ghost btn-circle avatar">
-        <div class="w-10 rounded-full">
-          <img
-            src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+  <div class="navbar-end w-1/12 lg:w-1/5">
+    <button class="btn btn-ghost btn-circle md:hidden">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+        />
+      </svg>
+    </button>
+    
+    <div *ngIf="!(isLogged$ | async)" class="dropdown dropdown-end">
+      <label tabindex="0" class="btn btn-ghost lg:hidden">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 transform scale-x-[-1]"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h8m-8 6h16"
           />
-        </div>
+        </svg>
+      </label>
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+      >
+        <li><a (click)="openLoginModal()">ログイン</a></li>
+        <li><a (click)="openSignupModal()">サインアップ</a></li>
+      </ul>
+    </div>
+    <ul
+      *ngIf="!(isLogged$ | async)"
+      class="menu menu-horizontal hidden lg:flex px-1 py-1"
+    >
+      <li><a (click)="openLoginModal()">ログイン</a></li>
+      <li>
+        <a class="bg-primary" (click)="openSignupModal()">サインアップ</a>
+      </li>
+    </ul>
+    <div *ngIf="isLogged$ | async" class="dropdown dropdown-end">
+      <label tabindex="0" class="btn btn-ghost">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 transform scale-x-[-1]"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h8m-8 6h16"
+          />
+        </svg>
       </label>
       <ul
         tabindex="0"
@@ -36,7 +97,7 @@
           </a>
         </li>
         <li><a>設定</a></li>
-        <li><a>ログアウト</a></li>
+        <li><a (click)="onLogoutClick()">ログアウト</a></li>
       </ul>
     </div>
   </div>
@@ -51,4 +112,3 @@
     <app-signup-form></app-signup-form>
   </app-daisy-modal>
 </div>
-

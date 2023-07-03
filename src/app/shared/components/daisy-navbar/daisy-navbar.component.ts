@@ -1,5 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { DaisyModalComponent } from '../daisy-modal/daisy-modal.component';
+import { AuthService } from '@app/core/services/auth.service';
+import { Observable } from 'rxjs';
+import { User } from '@app/core/models/user';
 
 @Component({
   selector: 'app-daisy-navbar',
@@ -7,13 +10,13 @@ import { DaisyModalComponent } from '../daisy-modal/daisy-modal.component';
   styleUrls: ['./daisy-navbar.component.css']
 })
 export class DaisyNavbarComponent {
+  user$: Observable<User | null> = this.auth.user$;
+  isLogged$: Observable<boolean> = this.auth.isLogged$;
+
   @ViewChild('loginModal') loginModal!: DaisyModalComponent;
   @ViewChild('signupModal') signupModal!: DaisyModalComponent;
 
-  ngAfterViewInit() {
-    // Make sure modal is defined
-    console.log(this.loginModal);
-  }
+  constructor(private auth: AuthService) { }
 
   openLoginModal() {
     this.loginModal.openModal();
@@ -21,5 +24,9 @@ export class DaisyNavbarComponent {
 
   openSignupModal() {
     this.signupModal.openModal();
+  }
+
+  onLogoutClick() {
+    this.auth.logout();
   }
 }
