@@ -11,12 +11,14 @@ import { CoreModule } from './core/core.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { UnauthorizedErrorInterceptor } from './core/interceptors/unauthorized-error.interceptor';
+import { ProfessorRatingsComponent } from './features/professor-ratings/professor-ratings.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     HomeComponent,
+    ProfessorRatingsComponent,
   ],
   imports: [
     BrowserModule,

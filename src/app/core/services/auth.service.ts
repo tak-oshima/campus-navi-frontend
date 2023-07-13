@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '@app/core/models/user';
+import { School } from '@app/core/models/school';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '@environments/environment';
+import { SearchService } from '@app/core/services/search.service'
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +13,10 @@ export class AuthService {
   private _user$: BehaviorSubject<User | null>;
   private _isLogged$: BehaviorSubject<boolean>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private searchService: SearchService) {
+    const userJson = localStorage.getItem('campus-navi-user');
     this._user$ = new BehaviorSubject(
-      JSON.parse(localStorage.getItem('campus-navi-user')!)
+      userJson ? JSON.parse(userJson) as User : null
     );
     this._isLogged$ = new BehaviorSubject(
       !!localStorage.getItem('campus-navi-token')

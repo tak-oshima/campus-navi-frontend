@@ -8,6 +8,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { DaisyOverlayHeroComponent } from './components/daisy-overlay-hero/daisy-overlay-hero.component';
 import { SchoolSearchBarComponent } from './components/school-search-bar/school-search-bar.component';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
+import { RatingCardComponent } from './components/rating-card/rating-card.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SignupFormComponent } from './components/signup-form/signup-form.compon
     DaisyOverlayHeroComponent,
     SchoolSearchBarComponent,
     SignupFormComponent,
+    RatingCardComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { SignupFormComponent } from './components/signup-form/signup-form.compon
     FooterComponent,
     DaisyOverlayHeroComponent,
     SchoolSearchBarComponent,
+    RatingCardComponent,
   ],
   providers: [
     { provide: COMPOSITION_BUFFER_MODE, useValue: false }

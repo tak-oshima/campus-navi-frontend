@@ -1,0 +1,70 @@
+<div class="flex flex-col sm:flex-row gap-3 sm:gap-10 rounded-lg bg-base-100 shadow p-10">
+    <div class="flex sm:hidden justify-between">
+      <div class="flex items-center bg-slate-200 rounded-3xl font-semibold px-3 py-1">{{rating.course}}</div>
+      <div class="flex items-center text-sm">2021-03-23</div>
+    </div>
+    <div class="flex sm:flex-col w-fit gap-5">
+      <div class="text-center">
+        <div class="text-sm font-medium">満足度</div>
+        <div
+          class="flex justify-center items-center bg-green-400 bg-opacity-70 rounded-md text-3xl font-extrabold w-16 h-16"
+          [ngClass]="{
+            'bg-green-400': rating.quality >= 4.0,
+            'bg-yellow-400': rating.quality >= 2.0 && rating.quality < 4.0,
+            'bg-red-400': rating.quality < 2.0
+          }"
+        >
+          {{rating.quality | number:'1.1-1'}}
+        </div>
+      </div>
+      <div class="text-center">
+        <div class="text-sm font-medium">難易度</div>
+        <div
+          class="flex justify-center items-center bg-gray-200 bg-opacity-70 rounded-md text-3xl font-extrabold  w-16 h-16"
+        >
+          {{rating.difficulty | number:'1.1-1'}}
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-3">
+      <div class="hidden sm:flex justify-between">
+        <div class="flex items-center bg-slate-200 rounded-3xl font-semibold px-3 py-1">{{rating.course}}</div>
+        <div class="flex items-center text-sm">{{rating.date | date:'yyyy-MM-dd'}}</div>
+      </div>
+      <div class="flex flex-wrap gap-x-7">
+        <div>
+          出席: 
+          <span class="font-semibold">{{rating.attendance}}</span>
+        </div>
+        <div>
+          教科書: 
+          <span class="font-semibold">{{rating.textbook}}</span>
+        </div>
+        <div>
+          中間: 
+          <span class="font-semibold">{{rating.midterm}}</span>
+        </div>
+        <div>
+          期末: 
+          <span class="font-semibold">{{rating.final}}</span>
+        </div>
+        <div>
+          持ち込み: 
+          <span class="font-semibold">{{rating.openNotes}}</span>
+        </div>
+      </div>
+      <div class="flex">
+        {{rating.comment}}
+      </div>
+      <div class="flex justify-between">
+        <div>
+          <button class="btn">like {{rating.likes}}</button>
+          <button class="btn">dislike {{rating.dislikes}}</button>
+        </div>
+        <div>
+          <button class="btn">report</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

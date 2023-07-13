@@ -1,6 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, of, switchMap } from 'rxjs';
+import { School } from '@app/core/models/school';
+import { SearchService } from '@app/core/services/search.service';
+import { debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-school-search-bar',
@@ -8,63 +10,38 @@ import { debounceTime, of, switchMap } from 'rxjs';
   styleUrls: ['./school-search-bar.component.css']
 })
 export class SchoolSearchBarComponent implements OnInit {
-  search = new FormControl();
+  searchControl = new FormControl();
   isFocused: boolean = false;
-  suggestions: any[] = [];
+  searchResult: any[] = [];
+
+  constructor(private searchService: SearchService) { }
+
+  ngOnInit() {
+    this.searchControl.valueChanges
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        switchMap(query => query ? this.searchService.searchSchools(query) : of([]))
+      )
+      .subscribe(response => {
+        this.searchResult = response;
+      });
+  }
+
+  onSchoolSelect(school: School) {
+    this.searchService.school = school;
+    this.searchControl.setValue(school.name);
+    console.log(school);
+  }
   
   @HostListener('focusin') onFocusIn() {
     this.isFocused = true;
   }
 
   @HostListener('focusout') onFocusOut() {
-    this.isFocused = false;
-  }
-
-  ngOnInit() {
-    this.search.valueChanges
-      .pipe(
-        debounceTime(500), // delay
-        switchMap(query => {
-          if (!query) {
-            return of([]);
-          }
-          return of(["慶應義塾大学", "東京大学", "早稲田大学", "青山学院大学", "筑波大学", "日本大学", "明治大学", "立教大学", "千葉大学", "京都大学"].filter(school => school.includes(query as string)))
-        })
-      )
-      .subscribe(response => {
-        this.suggestions = response;
-        console.log(this.suggestions);
-      });
+    setTimeout(() => {
+      this.isFocused = false;
+    }, 100); // a small delay like 100ms
   }
   
 }
-
-/** Example of how to autocomplete search bar
-import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-
-export class PatientListComponent implements OnInit {
-  public patients: Patient[];
-  public filteredPatients: Patient[];
-  public searchControl = new FormControl();
-
-  constructor(private patientService: PatientService) { }
-
-  ngOnInit() {
-    this.patientService.getPatients().subscribe(patients => {
-      this.patients = patients;
-      this.filteredPatients = patients;
-    });
-
-    this.searchControl.valueChanges
-      .pipe(
-        debounceTime(200),
-        distinctUntilChanged()
-      )
-      .subscribe(value => {
-        this.filteredPatients = this.patients.filter(patient => 
-          patient.name.toLowerCase().includes(value.toLowerCase()));
-      });
-  }
-}
-*/

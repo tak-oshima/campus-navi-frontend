@@ -1,25 +1,26 @@
 <div class="relative text-gray-600">
   <input
-    [formControl]="search"
+    [formControl]="searchControl"
     type="text"
-    placeholder="Type here"
+    placeholder="大学名を入力"
     class="input w-full focus:outline-none focus:border-base-100 px-6"
     [ngClass]="{
-      'rounded-t-3xl': isFocused && suggestions.length > 0,
-      'rounded-b-none': isFocused && suggestions.length > 0,
+      'rounded-t-3xl': isFocused && searchResult.length > 0,
+      'rounded-b-none': isFocused && searchResult.length > 0,
     }"
   />
   <div
-    id="suggestion-box"
-    *ngIf="isFocused && suggestions.length > 0"
+    *ngIf="isFocused && searchResult.length > 0"
     class="bg-base-100 rounded-t-none rounded-b-3xl w-full absolute top-full left-0 max-h-80 overflow-y-scroll"
   >
     <ul class="">
       <li
-        *ngFor="let suggestion of suggestions"
+        *ngFor="let school of searchResult"
         class="text-left h-12 px-6 flex items-center hover:bg-base-200"
+        (click)="onSchoolSelect(school)"
       >
-        <a>{{ suggestion }}</a>
+        {{ school.name }}
+        <span class="text-gray-400">（{{school.prefecture}}{{school.city}}）</span>
       </li>
     </ul>
   </div>

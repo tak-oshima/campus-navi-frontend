@@ -1,7 +1,9 @@
+import { School } from "./school";
+
 export interface User {
-    _id: number;
+    id: number;
     username: string;
     email: string;
     password: string;
-    school?: string;
+    school?: School;
 }
